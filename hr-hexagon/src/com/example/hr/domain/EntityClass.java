@@ -14,5 +14,6 @@ import java.lang.annotation.Target;
 public @interface EntityClass {
 
 	String[] identities();
+	boolean aggregate() default false;
 
 }
