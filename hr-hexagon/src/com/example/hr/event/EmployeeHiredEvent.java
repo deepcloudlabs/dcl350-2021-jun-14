@@ -7,6 +7,7 @@ public class EmployeeHiredEvent extends EmployeeEvent {
 
 	public EmployeeHiredEvent(TcKimlikNo kimlik) {
 		super(kimlik);
+		setEventType(EmployeeEventType.EMPLOYEE_HIRED_EVENT);
 	}
 
 }
