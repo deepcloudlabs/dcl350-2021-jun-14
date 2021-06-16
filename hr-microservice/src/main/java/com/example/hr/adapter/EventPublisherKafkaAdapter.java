@@ -3,18 +3,18 @@ package com.example.hr.adapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.event.EventListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.example.hr.event.EmployeeEvent;
-import com.example.hr.infra.EventPublisher;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 // GoF's Adapter Pattern: i) Class Adapter ii) Object Adapter 
 @Service
 @ConditionalOnProperty(name="messageBroker",havingValue = "kafka")
-public class EventPublisherKafkaAdapter implements EventPublisher<EmployeeEvent> {
+public class EventPublisherKafkaAdapter {
 	@Autowired 
 	private KafkaTemplate<String, String> kafkaTemplate; // (ii) Object Adapter
 	
@@ -24,8 +24,8 @@ public class EventPublisherKafkaAdapter implements EventPublisher<EmployeeEvent>
 	@Value("${topicName}")
 	private String topicName;
 	
-	@Override
-	public void publishEvent(EmployeeEvent event) {
+	@EventListener
+	public void listenEvent(EmployeeEvent event) {
 		try {
 			var json = objectMapper.writeValueAsString(event);
 			kafkaTemplate.send(topicName, json);

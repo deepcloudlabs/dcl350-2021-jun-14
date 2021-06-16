@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.AsyncRestTemplate;
-import org.springframework.web.client.RestTemplate;
 
 import com.example.dto.TickerDTO;
 
+@SuppressWarnings("deprecation")
 @Service
 public class BinanceAsyncRestClientService {
     @Autowired
