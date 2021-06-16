@@ -25,7 +25,8 @@ public class StandardHrApplication implements HrApplication {
 		if (employeeRepository.exists(employee))
 			throw new IllegalArgumentException("Employee already exists.");
 		var hiredEmployee = employeeRepository.insert(employee);
-		var event = new EmployeeHiredEvent(hiredEmployee.getKimlik());
+		var event = new EmployeeHiredEvent(hiredEmployee.getKimlik().getValue());
+		event.setEmployeeFullName(employee.getFullname().toString());
 		publisher.publishEvent(event);
 		return hiredEmployee;
 	}
@@ -34,7 +35,8 @@ public class StandardHrApplication implements HrApplication {
 	public Optional<Employee> fireEmployee(TcKimlikNo identity) {
 		Optional<Employee> firedEmployee = employeeRepository.removeByIdentity(identity);
 		if (firedEmployee.isPresent()) {
-			var event = new EmployeeFiredEvent(identity);
+			var event = new EmployeeFiredEvent(identity.getValue());
+			event.setEmployeeFullName(firedEmployee.get().getFullname().toString());			
 			publisher.publishEvent(event);
 		}
 		return firedEmployee;

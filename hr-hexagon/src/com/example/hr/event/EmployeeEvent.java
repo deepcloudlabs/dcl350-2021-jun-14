@@ -4,25 +4,32 @@ import java.time.Instant;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.example.hr.domain.TcKimlikNo;
-
 public abstract class EmployeeEvent {
 	private static final AtomicInteger SEQUENCE_ID = new AtomicInteger();
-	protected TcKimlikNo kimlik;
+	protected String employeeIdentity;
+	protected String employeeFullName;
 	protected String eventId;
 	protected long eventSequenceId;
 	protected long timeStamp;
 	protected EmployeeEventType eventType;
 
-	public EmployeeEvent(TcKimlikNo kimlik) {
-		this.kimlik = kimlik;
+	public EmployeeEvent(String employeeIdentity) {
+		this.employeeIdentity = employeeIdentity;
 		eventSequenceId = SEQUENCE_ID.incrementAndGet();
 		eventId = UUID.randomUUID().toString();
 		timeStamp = Instant.now().toEpochMilli();
 	}
 
-	public TcKimlikNo getKimlik() {
-		return kimlik;
+	public String getEmployeeFullName() {
+		return employeeFullName;
+	}
+
+	public void setEmployeeFullName(String employeeFullName) {
+		this.employeeFullName = employeeFullName;
+	}
+
+	public String getEmployeeIdentity() {
+		return employeeIdentity;
 	}
 
 	public String getEventId() {

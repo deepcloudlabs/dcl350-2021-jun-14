@@ -1,12 +1,10 @@
 package com.example.hr.event;
 
-import com.example.hr.domain.TcKimlikNo;
-
 @DomainEvent
 public class EmployeeHiredEvent extends EmployeeEvent {
 
-	public EmployeeHiredEvent(TcKimlikNo kimlik) {
-		super(kimlik);
+	public EmployeeHiredEvent(String identity) {
+		super(identity);
 		setEventType(EmployeeEventType.EMPLOYEE_HIRED_EVENT);
 	}
 
