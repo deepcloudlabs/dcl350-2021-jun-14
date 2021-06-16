@@ -23,6 +23,7 @@ public class ModelMapperConfig {
 						           .iban(request.getIban())
 						           .salary(request.getSalary(),request.getCurrency())
 						           .photo(request.getPhoto().getBytes())
+						           .style(request.getStyle().name())
 						           .birthYear(request.getBirthYear())
 						           .departments(request.getDepartments().toArray(new String[0]))
 						           .build();
@@ -43,7 +44,8 @@ public class ModelMapperConfig {
 	private static Converter<Employee,EmployeeEntity> employee2EmployeeEntityConverter =
 			context -> {
 				var employee = context.getSource();
-				var employeeEntity = new EmployeeEntity();
+				var employeeEntity = new EmployeeEntity();				
+				employeeEntity.setIdentity(employee.getKimlik().getValue());
 				employeeEntity.setBirthYear(employee.getBirthYear().getValue());
 				employeeEntity.setFirstName(employee.getFullname().getFirstName());
 				employeeEntity.setLastName(employee.getFullname().getLastName());
