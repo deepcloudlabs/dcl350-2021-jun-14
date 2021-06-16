@@ -13,9 +13,9 @@ public class WebsocketClient {
 			"wss://stream.binance.com:9443/ws/btcusdt@trade";
 	public static void main(String[] args) throws IOException, InterruptedException {
 		var listener = new BinanceWebSocketListener();
-		var client = HttpClient.newHttpClient()
-				               .newWebSocketBuilder()
-				               .buildAsync(URI.create(BINANCE_REST_OVER_WS_URL), listener );
+		HttpClient.newHttpClient()
+	               .newWebSocketBuilder()
+	               .buildAsync(URI.create(BINANCE_REST_OVER_WS_URL), listener );
 		TimeUnit.SECONDS.sleep(20);
 	}
 
