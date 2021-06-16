@@ -2,21 +2,28 @@ package com.example.hr.boundary;
 
 import java.util.List;
 
+import javax.validation.constraints.Max;
+
 import com.example.hr.domain.FiatCurrency;
 import com.example.hr.domain.JobStyle;
+import com.example.validation.Iban;
+import com.example.validation.TcKimlik;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class HireEmployeeRequest {
 	@JsonProperty("kimlik")
+	@TcKimlik
 	private String identity;
 	@JsonProperty("first")
 	private String firstName;
 	@JsonProperty("last")
 	private String lastName;
+	@Iban
 	private String iban;
 	private double salary;
 	private FiatCurrency currency;
 	@JsonProperty("birth_year")
+	@Max(2006)
 	private int birthYear;
 	private JobStyle style;
 	private List<String> departments;
