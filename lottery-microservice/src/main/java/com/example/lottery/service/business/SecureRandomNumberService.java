@@ -16,7 +16,7 @@ public class SecureRandomNumberService implements RandomNumberService {
 
 	@Override
 	public int generate(int min, int max) {
-		System.err.println("SecureRandomNumberService::generate");
+		// System.err.println("SecureRandomNumberService::generate");
 		return random.nextInt(max - min + 1) + min;
 	}
 

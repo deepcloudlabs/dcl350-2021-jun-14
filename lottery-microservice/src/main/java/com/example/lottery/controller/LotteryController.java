@@ -24,10 +24,13 @@ public class LotteryController {
 	private int lotteryMax;
 	@Value("${lotterySize}")
 	private int lotterySize;
+	@Value("${server.port}")
+	private int port;
 	
 	// http://localhost:5100/lottery/api/v1/numbers?column=10
 	@GetMapping
 	public List<List<Integer>> draw(@RequestParam int column){
+		System.err.println("New request has arrived for port "+port+"!");
 		return lotteryApplication.draw(lotteryMax, lotterySize, column);
 	}
 }
