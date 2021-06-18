@@ -17,6 +17,13 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 //     move BOOT-INF\classes\application.properties .
 //     java -cp . -jar lottery.jar  ==> now spring uses the extracted appication.properties file  
 
+// Get token
+// curl -X POST "http://localhost:9100/lottery/api/v1/login" -d "{\"username\": \"jack\", \"password\": \"secret\"}" -H "Content-Type: application/json"
+// Token ==> eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNrIiwiaWF0IjoxNjI0MDIyNzYxLCJleHAiOjE2MjQwMjM0ODF9.4pzlm8bWcD0eH57HKH7gwPb1HgZ07bZMZ7LCqlxpG3U
+
+// Call a secure rest api method:
+// curl  "http://localhost:9100/lottery/api/v1/numbers?column=10" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNrIiwiaWF0IjoxNjI0MDIyNzYxLCJleHAiOjE2MjQwMjM0ODF9.4pzlm8bWcD0eH57HKH7gwPb1HgZ07bZMZ7LCqlxpG3U"
+
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableEurekaClient
