@@ -60,7 +60,8 @@ public class ReactiveBinanceClient {
 		    .parallel()
 		    .runOn(Schedulers.boundedElastic())
 		    .flatMap(this::getTicker)
-		    .sorted(COMPARE_BY_PRICE_DESC)
+		    .sorted(COMPARE_BY_PRICE_DESC) // global -> finite stream
+		    //.ordered(COMPARE_BY_PRICE_DESC) // local -> infinite stream		    
 		    .subscribe(System.err::println);		    
 		System.err.println(String.format("Calling binance rest api %d times...✔",SYMBOLS.size()));
 	}
